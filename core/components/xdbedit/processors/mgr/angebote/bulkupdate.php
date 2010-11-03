@@ -10,7 +10,7 @@ $packagepath = $modx->getOption('core_path') . 'components/'.$packageName.'/';
 $modelpath = $packagepath.'model/';
 
 $modx->addPackage($packageName,$modelpath,$prefix);
-$classname = strtoupper(substr($tablename, 0, 1)) . substr($tablename, 1) . '';
+$classname = $modx->xdbedit->getClassName($tablename);
 
 if (empty($scriptProperties['objects'])) {
     return $modx->error->failure($modx->lexicon('quip.comment_err_ns'));

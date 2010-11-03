@@ -11,7 +11,7 @@ $packagepath = $modx->getOption('core_path') . 'components/'.$packageName.'/';
 $modelpath = $packagepath.'model/';
 
 $modx->addPackage($packageName,$modelpath,$prefix);
-$classname = strtoupper(substr($tablename, 0, 1)) . substr($tablename, 1) . '';
+$classname = $modx->xdbedit->getClassName($tablename);
 
 if ($this->modx->lexicon)
 {
