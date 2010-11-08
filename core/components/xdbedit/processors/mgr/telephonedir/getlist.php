@@ -25,9 +25,16 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,20);
 $sort = $modx->getOption('sort',$scriptProperties,'id');
 $dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$year = $modx->getOption('year',$scriptProperties,'alle');
+$month = $modx->getOption('month',$scriptProperties,'alle');
 
 $c = $modx->newQuery($classname);
-
+if ($year != 'alle'){
+$c->where("YEAR(" . $modx->escape($classname) . '.' . $modx->escape('createdon') . ") = " .$year, xPDOQuery::SQL_AND);		
+}
+if ($month != 'alle'){
+$c->where("MONTH(" . $modx->escape($classname) . '.' . $modx->escape('createdon') . ") = " .$month, xPDOQuery::SQL_AND);		
+}
 $count = $modx->getCount($classname,$c);
 
 $c->select('
