@@ -113,7 +113,7 @@ class Xdbedit {
 		return $output;
     }
 
-    public function loadConfigs(){
+    function loadConfigs(){
         
 		$configs = ( isset ($this->config['configs']))?explode(',', $this->config['configs']): array ();
             //$configs = array_merge( array ('master'), $configs);
@@ -127,12 +127,12 @@ class Xdbedit {
                 }
             }
     }
-
     public function getClassName($tablename){
         $manager= $this->modx->getManager();
         $generator= $manager->getGenerator();
         return $generator->getClassName($tablename);
-    }
+    }	
+
     /**
      * Gets a Chunk and caches it; also falls back to file-based templates
      * for easier debugging.

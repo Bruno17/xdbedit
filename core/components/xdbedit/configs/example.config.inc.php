@@ -52,13 +52,34 @@
                         'inputTV'=>'region'
                 ))),
                 array(
-                    'caption'=>'CreatedonTestTab',
+                    'caption'=>'Dates',
                     'fields'=>array(
                     array(
-                        'field'=>'createdon',
-                        'caption'=>'Created On',
+                        'field'=>'pub_date',
+                        'caption'=>'Publish on',
 						'inputTV'=>'datum'
-                ))));
+                    ),array(
+                        'field'=>'unpub_date',
+                        'caption'=>'Unpublish on',
+						'inputTV'=>'datum'
+                    ),array(
+                        'field'=>'publishedon',
+                        'caption'=>'Published on',
+						'inputTV'=>'datum'
+                    ),array(
+                        'field'=>'ow_publishedon',
+                        'caption'=>'Published on',
+						'inputTV'=>'overwrite'
+                    ),array(
+                        'field'=>'createdon',
+                        'caption'=>'Created on',
+						'inputTV'=>'datum'
+                    ),array(
+                        'field'=>'ow_createdon',
+                        'caption'=>'Created on',
+						'inputTV'=>'overwrite'
+                    ))));
+/*);
 
 /*
 * here you can load your package(s) or in the processors

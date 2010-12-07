@@ -39,40 +39,87 @@ Xdbedit.grid.Object = function(config) {
             ,sortable: true
             ,width: 200
         }]
-		,tbar: [{
-            text: _(Xdbedit.customconfigs.task+'.bulk_actions')||_('xdbedit.bulk_actions')
-            ,menu: [{
-                text:_(Xdbedit.customconfigs.task+'.publish_selected')||_('xdbedit.publish_selected') 
-                ,handler: this.publishSelected
-                ,scope: this
-            },{
-                text:_(Xdbedit.customconfigs.task+'.unpublish_selected')||_('xdbedit.unpublish_selected') 
-                ,handler: this.unpublishSelected
-                ,scope: this
-            }]
-        },{
-            text: _('year')+':'
-        },{
-            xtype: 'xdbedit-combo-year'
-            ,id: 'xdbedit-filter-year'
-            ,itemId: 'year'
-            ,value: 'alle'
-            ,width: 120
-            ,listeners: {
-                'select': {fn: this.changeYear,scope:this}
-            }
-        },{
-            text: _('month')+':'
-        },{
-            xtype: 'xdbedit-combo-month'
-            ,id: 'xdbedit-filter-month'
-            ,itemId: 'month'
-            ,value: 'alle'
-            ,width: 120
-            ,listeners: {
-                'select': {fn:this.changeMonth,scope:this}
-            }
-        }]        
+,tbar: [{
+				xtype: 'buttongroup',
+				id: 'filter-buttongroup',
+				title: 'Filter',
+				columns: 8,
+				defaults: {
+					scale: 'large'
+				},
+				items: [{
+					text: 'Region:'
+				}, {
+					xtype: 'xdbedit-combo-region',
+					id: 'xdbedit-filter-region',
+					itemId: 'region',
+					value: 'all',
+					width: 120,
+					listeners: {
+						'select': {
+							fn: this.changeRegion,
+							scope: this
+						}
+					}
+				}, {
+					text: _('year') + ':'
+				}, {
+					xtype: 'xdbedit-combo-year',
+					id: 'xdbedit-filter-year',
+					itemId: 'year',
+					value: 'all',
+					width: 120,
+					listeners: {
+						'select': {
+							fn: this.changeYear,
+							scope: this
+						}
+					}
+				}, {
+					text: _('month') + ':'
+				}, {
+					xtype: 'xdbedit-combo-month',
+					id: 'xdbedit-filter-month',
+					itemId: 'month',
+					value: 'all',
+					width: 120,
+					listeners: {
+						'select': {
+							fn: this.changeMonth,
+							scope: this
+						}
+					}
+				}]
+			}, {
+				xtype: 'buttongroup',
+				title: 'Aktionen',
+				columns: 2,
+				defaults: {
+					scale: 'large'
+				},
+				items: [{
+					text: _(Xdbedit.customconfigs.task + '.bulk_actions') || _('xdbedit.bulk_actions'),
+					menu: [{
+						text: _(Xdbedit.customconfigs.task + '.publish_selected') || _('xdbedit.publish_selected'),
+						handler: this.publishSelected,
+						scope: this
+					}, {
+						text: _(Xdbedit.customconfigs.task + '.unpublish_selected') || _('xdbedit.unpublish_selected'),
+						handler: this.unpublishSelected,
+						scope: this
+					}, {
+						text: _(Xdbedit.customconfigs.task + '.delete_selected') || _('xdbedit.delete_selected'),
+						handler: this.deleteSelected,
+						scope: this
+					}]
+				},{
+                    text: _(Xdbedit.customconfigs.task + '.show_trash') || _('xdbedit.show_trash')
+                    ,handler: this.toggleDeleted
+                    ,enableToggle: true
+                    ,scope: this
+        }]
+			
+			}]     
 		,viewConfig: {
             forceFit:true,
             //enableRowBody:true,
@@ -97,6 +144,7 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
     ,editObject: function() {
 		formpanel=Ext.getCmp('xdbedit-panel-object');
         formpanel.autoLoad.params.object_id=this.menu.record.id;
+		formpanel.autoLoad.params['region']=null;
 		formpanel.doAutoLoad();
 		
 		//location.href = '?a='+MODx.request.a+'&action=editorpage&object_id='+this.menu.record.id;
@@ -104,6 +152,7 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
     ,createObject: function() {
 		formpanel=Ext.getCmp('xdbedit-panel-object');
         formpanel.autoLoad.params.object_id='neu';
+		formpanel.autoLoad.params['region']=null;
 		formpanel.doAutoLoad();		
         //location.href = '?a='+MODx.request.a+'&action=editorpage&object_id=neu';
     }
@@ -121,6 +170,46 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
             }
         });
     }
+	,deleteObject: function() {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'mgr/xdbedit/update'
+				,task: 'delete'
+                ,object_id: this.menu.record.id
+				,configs: this.config.configs
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    },recallObject: function() {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'mgr/xdbedit/update'
+				,task: 'recall'
+                ,object_id: this.menu.record.id
+				,configs: this.config.configs
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    },removeObject: function() {
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'mgr/'+Xdbedit.customconfigs.task+'/remove'
+				,task: 'removeone'
+                ,object_id: this.menu.record.id
+				,configs: this.config.configs
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }		
 	,unpublishObject: function() {
  		MODx.Ajax.request({
             url: this.config.url
@@ -134,7 +223,20 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
-    },getSelectedAsList: function() {
+    },toggleDeleted: function(btn,e) {
+        var s = this.getStore();
+        if (btn.pressed) {
+            s.setBaseParam('showtrash',1);
+            btn.setText(_(Xdbedit.customconfigs.task + '.show_normal') || _('xdbedit.show_normal'));
+        } else {
+            s.setBaseParam('showtrash',0);
+            btn.setText(_(Xdbedit.customconfigs.task + '.show_trash') || _('xdbedit.show_trash'));
+        }
+        this.getBottomToolbar().changePage(1);
+        s.removeAll();
+        this.refresh();
+    }
+	,getSelectedAsList: function() {
         var sels = this.getSelectionModel().getSelections();
         if (sels.length <= 0) return false;
 
@@ -184,17 +286,46 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
             }
         });
         return true;
+    },deleteSelected: function(btn,e) {
+        var cs = this.getSelectedAsList();
+        if (cs === false) return false;
+        
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'mgr/'+Xdbedit.customconfigs.task+'/bulkupdate'
+				,configs: this.config.configs
+				,task: 'delete'
+                ,objects: cs
+            }
+            ,listeners: {
+                'success': {fn:function(r) {
+                    this.getSelectionModel().clearSelections(true);
+                    this.refresh();
+                },scope:this}
+            }
+        });
+        return true;
     },changeYear: function(cb,nv,ov) {
-        this.setFilterParams(cb.getValue(),'alle');
+        this.setFilterParams({
+			year:cb.getValue(),
+			month:'all'
+		});
     }
     ,changeMonth: function(cb,nv,ov) {
-        this.setFilterParams(null,cb.getValue());
+        this.setFilterParams({
+			month:cb.getValue()
+		});        
+    }
+	,changeRegion: function(cb,nv,ov) {
+        this.setFilterParams({
+			region:cb.getValue()
+		});      		
     }
    ,onStoreLoad: function() {
 		if (this.isModified){
 		var tb = this.getTopToolbar();
         if (!tb) {return false;}
-
            ycb = tb.getComponent('year');
             if (ycb) {
                 //mcb.store.baseParams['year'] = y;
@@ -223,27 +354,47 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
 		var s = this.getStore();
         if (s) {
             //if (y) {s.baseParams['year'] = y;}
-            //if (m) {s.baseParams['month'] = m || 'alle';}
+            //if (m) {s.baseParams['month'] = m || 'all';}
             //s.removeAll();
         }
         */
         //this.getBottomToolbar().changePage(1);
         //this.refresh();
     }
-    ,setFilterParams: function(y,m) {
+    ,setFilterParams: function(params) {
         var tb = this.getTopToolbar();
         if (!tb) {return false;}
-
-        var mcb;
-        if (y) {
-            tb.getComponent('year').setValue(y);
-
-            mcb = tb.getComponent('month');
+        var ccb = null;
+		var ycb = null;
+		var mcb = null;
+        if (params.region) {
+            params.month = params.month||'all';
+			params.year = params.year||'all';
+			Ext.getCmp('xdbedit-filter-region').setValue(params.region);
+            //ycb = tb.getComponent('year');
+			ycb = Ext.getCmp('xdbedit-filter-year');
+			
+            if (ycb) {
+                ycb.store.baseParams['region'] = params.region;
+                ycb.store.load({
+                    callback: function() {
+                        ycb.setValue('all');
+                    }
+                });
+            }
+        } 
+        
+        if (params.year) {
+            params.month = params.month||'all';
+			Ext.getCmp('xdbedit-filter-year').setValue(params.year);
+            //mcb = tb.getComponent('month');
+			mcb = Ext.getCmp('xdbedit-filter-month');
             if (mcb) {
-                mcb.store.baseParams['year'] = y;
+                mcb.store.baseParams['year'] = params.year;
+				if (params.region) {mcb.store.baseParams['region'] = params.region;}
                 mcb.store.load({
                     callback: function() {
-                        mcb.setValue(m || 'alle');
+                        mcb.setValue(params.month);
                     }
                 });
             }
@@ -251,13 +402,14 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
 
         var s = this.getStore();
         if (s) {
-            if (y) {s.baseParams['year'] = y;}
-            if (m) {s.baseParams['month'] = m || 'alle';}
+            if (params.year) {s.baseParams['year'] = params.year;}
+            if (params.month) {s.baseParams['month'] = params.month ;}
+			if (params.region) {s.baseParams['region'] = params.region ;}
             s.removeAll();
         }
         this.getBottomToolbar().changePage(1);
         this.refresh();
-    }	
+    }
     ,getMenu: function() {
         //this.store.on('load', this.reloadDateCombos(this)); 
 		//console.log(this.store);
@@ -284,7 +436,25 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
                 text:_(Xdbedit.customconfigs.task+'.unpublish')||_('xdbedit.unpublish')
                 ,handler: this.unpublishObject
             });
+        }
+        m.push('-');
+        if (n.deleted == 1) {
+        m.push({
+            text: _(Xdbedit.customconfigs.task+'.recall')||_('xdbedit.recall')
+            ,handler: this.recallObject
+        });
+		m.push('-');
+        m.push({
+            text: _(Xdbedit.customconfigs.task+'.remove')||_('xdbedit.remove')
+            ,handler: this.removeObject
+        });						
+        } else if (n.deleted == 0) {
+        m.push({
+            text: _(Xdbedit.customconfigs.task+'.delete')||_('xdbedit.delete')
+            ,handler: this.deleteObject
+        });		
         }		
+		
         this.addContextMenuItem(m);
     }
 });
@@ -303,14 +473,14 @@ Xdbedit.combo.Month = function(config) {
 		,resizable: false
         ,pageSize: 0		
         ,url: Xdbedit.config.connector_url
-        ,fields: ['name']
-        ,displayField: 'name'
-        ,valueField: 'name'
+        ,fields: ['optionname']
+        ,displayField: 'optionname'
+        ,valueField: 'optionname'
         ,baseParams: {
 		    action: 'mgr/'+Xdbedit.customconfigs.task+'/getdates',
 			configs: Xdbedit.config.configs,
 			mode: 'month',
-			year: 'alle'
+			year: 'all'
         }
     });
     Xdbedit.combo.Month.superclass.constructor.call(this,config);
@@ -331,9 +501,9 @@ Xdbedit.combo.Year = function(config) {
 		,resizable: false
         ,pageSize: 0
         ,url: Xdbedit.config.connector_url
-        ,fields: ['name']
-        ,displayField: 'name'
-        ,valueField: 'name'
+        ,fields: ['optionname']
+        ,displayField: 'optionname'
+        ,valueField: 'optionname'
         ,baseParams: { 
 		    action: 'mgr/'+Xdbedit.customconfigs.task+'/getdates',
 			configs: Xdbedit.config.configs,
@@ -344,3 +514,29 @@ Xdbedit.combo.Year = function(config) {
 };
 Ext.extend(Xdbedit.combo.Year,MODx.combo.ComboBox);
 Ext.reg('xdbedit-combo-year',Xdbedit.combo.Year);
+
+Xdbedit.combo.Region = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        name: 'region'
+        ,hiddenName: 'region'
+        ,forceSelection: true
+        ,typeAhead: false
+        ,editable: false
+        ,allowBlank: false
+        ,listWidth: 300		
+		,resizable: false
+        ,pageSize: 0		
+        ,url: Xdbedit.config.connector_url
+        ,fields: ['name']
+        ,displayField: 'name'
+        ,valueField: 'name'
+        ,baseParams: {
+		    action: 'mgr/'+Xdbedit.customconfigs.task+'/getregions',
+			configs: Xdbedit.config.configs,
+        }
+    });
+    Xdbedit.combo.Region.superclass.constructor.call(this,config);
+};
+Ext.extend(Xdbedit.combo.Region,MODx.combo.ComboBox);
+Ext.reg('xdbedit-combo-region',Xdbedit.combo.Region);

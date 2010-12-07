@@ -27,7 +27,6 @@ if (is_array($onResourceTVFormPrerender)) {
 
 //print_r($modx->boerse->config);
 
-$tabs=$modx->xdbedit->getTabs();
 
 //print_r($tabs);
 
@@ -72,6 +71,8 @@ if (empty($object)) return $modx->error->failure($modx->lexicon('quip.thread_err
 
 //echo '<pre>'.print_r($angebot->toArray(),1).'</pre>';
 
+$modx->xdbedit->loadConfigs();
+$tabs=$modx->xdbedit->getTabs();
 $fieldid=0;
 
 foreach ($tabs as $tabid=>$tab){
@@ -82,6 +83,8 @@ $categories[$tabid] = $emptycat;
 	
 	$fields=$tab['fields'];
 	foreach ($fields as $field){
+		
+		
 		$fieldid++;
 		//echo $angebot->get($field['field']);
 		if ($tv = $modx->getObject('modTemplateVar',array('name'=>$field['inputTV']))){

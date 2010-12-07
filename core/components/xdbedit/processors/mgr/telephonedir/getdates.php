@@ -24,6 +24,7 @@ $isCombo = !empty($scriptProperties['combo']);
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,20);
 $mode = $modx->getOption('mode',$scriptProperties,'year');
+$region = $modx->getOption('region',$scriptProperties,'all');
 
 
 $c = $modx->newQuery($classname);
@@ -35,17 +36,17 @@ switch ($mode){
 	case 'year':
         $sort = $modx->getOption('sort',$scriptProperties,'YEAR(`'.$classname.'`.`createdon`)');	
         $dir = $modx->getOption('dir',$scriptProperties,'DESC');
-		$c->select('id,YEAR(createdon) as name');
+		$c->select('id,YEAR(createdon) as optionname');
 	break;
 	case 'month':
-        if ($scriptProperties['year']=='alle'){
+        if ($scriptProperties['year']=='all'){
         	$rows=array();
 			$execute = false;
         }
 		else{
 		    $sort = $modx->getOption('sort',$scriptProperties,'MONTH(`'.$classname.'`.`createdon`)');	
             $dir = $modx->getOption('dir',$scriptProperties,'ASC');
-			$c->select('id,MONTH(createdon) as name,YEAR(`'.$classname.'`.`createdon`) as year');
+			$c->select('id,MONTH(createdon) as optionname,YEAR(`'.$classname.'`.`createdon`) as year');
             $c->where("YEAR(" . $modx->escape($classname) . '.' . $modx->escape('createdon') . ") = " .$scriptProperties['year'], xPDOQuery::SQL_AND);								
 
 		}
@@ -56,7 +57,10 @@ switch ($mode){
 }
 
 if ($execute){
-$c->groupby('name');
+if ($region != 'all'){
+    $c->where(array($classname.'.region' => $region));
+}	
+$c->groupby('optionname');
 $c->sortby($sort,$dir);
 $stmt  = $c->prepare();
 //echo $c->toSql();
@@ -66,7 +70,7 @@ $rows = $stmt->fetchAll();
 
 $count = count($rows);
 
-$rows = array_merge(array(array('name'=>'alle')),$rows);
+$rows = array_merge(array(array('optionname'=>'all')),$rows);
 //$c->prepare(); echo $c->toSql();
 /*
 $collection = $modx->getCollection($classname, $c);

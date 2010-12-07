@@ -27,6 +27,11 @@ switch ($scriptProperties['task']) {
         $object->set('publishedon',strftime('%Y-%m-%d %H:%M:%S'));
         $object->set('publishedby',$modx->user->get('id'));  
 	    break;
+	case 'delete':
+        $object->set('deleted','1');
+        $object->set('deletedon',strftime('%Y-%m-%d %H:%M:%S'));
+        $object->set('deletedby',$modx->user->get('id'));  
+	    break;				
 	case 'unpublish':
         $object->set('unpublishedon', strftime('%Y-%m-%d %H:%M:%S'));
         $object->set('published', '0');

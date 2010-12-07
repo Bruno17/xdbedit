@@ -22,29 +22,29 @@
  * @package xdbedit
  */
 /**
- * XdbEdit English language file
+ * XdbEdit French language file
  *
  * @package xdbedit
  * @subpackage lexicon
  */
 $_lang['xdbedit'] = 'Custom-Table Editor';
-$_lang['xdbedit.edit'] = 'Edit';
-$_lang['xdbedit.create'] = 'Create';
-$_lang['xdbedit.publish'] = 'Publish';//ver&ouml;ffentlichen
-$_lang['xdbedit.unpublish'] = 'Unpublish';//'zur&uuml;ckziehen'
+$_lang['xdbedit.edit'] = 'Éditer';
+$_lang['xdbedit.create'] = 'Créer';
+$_lang['xdbedit.publish'] = 'Publier';
+$_lang['xdbedit.unpublish'] = 'Dépublier';
 $_lang['xdbedit.delete'] = 'Delete';
-$_lang['xdbedit.bulk_actions'] = 'Bulk Actions';
-$_lang['xdbedit.publish_selected'] = 'Publish Selected';
-$_lang['xdbedit.unpublish_selected'] = 'Unpublish Selected';
-$_lang['xdbedit.delete_selected'] = 'Delete Selected';
-$_lang['xdbedit.remove_selected'] = 'Remove Selected';
+$_lang['xdbedit.bulk_actions'] = 'Actions groupées';
+$_lang['xdbedit.publish_selected'] = 'Publier la sélection';
+$_lang['xdbedit.unpublish_selected'] = 'Dépublier la sélection';
+$_lang['xdbedit.delete_selected'] = 'Supprimer la sélection';
+$_lang['xdbedit.remove_selected'] = 'Enlever la sélection';
 $_lang['xdbedit.show_trash'] = 'Trash View';
 $_lang['xdbedit.show_normal'] = 'Normal View';
 $_lang['xdbedit.recall'] = 'Recall';
 $_lang['xdbedit.remove'] = 'Remove';
-$_lang['angebote.edit'] = 'Angebot bearbeiten';
-$_lang['angebote.create'] = 'Angebote erstellen';
-$_lang['angebote.publish'] = 'Angebot ver&ouml;ffentlichen';
-$_lang['angebote.unpublish'] = 'Angebot zur&uuml;ckziehen';
-$_lang['month'] = 'Month';
-$_lang['year'] = 'Year';
+$_lang['angebote.edit'] = 'Modifier l\'offre';
+$_lang['angebote.create'] = 'Créer l\'offre';
+$_lang['angebote.publish'] = 'Publier l\'offre';
+$_lang['angebote.unpublish'] = 'Dépublier l\'offre';
+$_lang['month'] = 'Mois';
+$_lang['year'] = 'Année';
