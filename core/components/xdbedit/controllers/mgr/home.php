@@ -30,7 +30,7 @@
 
 
 $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/util/datetime.js');
-//$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
+$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/element/modx.panel.tv.renders.js');
 //$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.grid.resource.security.js');
 //$modx->regClientStartupScript($xdbedit->config['jsUrl'].'widgets/modx.panel.resource.js');
 //$modx->regClientStartupScript($context->getOption('manager_url').'assets/modext/widgets/resource/modx.panel.resource.tv.js');
