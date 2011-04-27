@@ -142,7 +142,7 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
         return '<a href="'+v+'" target="_blank">'+rec.data.pagetitle+'</a>';
     }
     ,editObject: function() {
-		formpanel=Ext.getCmp('xdbedit-panel-object');
+		formpanel=Ext.getCmp('modx-panel-resource');
         formpanel.autoLoad.params.object_id=this.menu.record.id;
 		formpanel.autoLoad.params['region']=null;
 		formpanel.doAutoLoad();
@@ -150,7 +150,7 @@ Ext.extend(Xdbedit.grid.Object,MODx.grid.Grid,{
 		//location.href = '?a='+MODx.request.a+'&action=editorpage&object_id='+this.menu.record.id;
     }
     ,createObject: function() {
-		formpanel=Ext.getCmp('xdbedit-panel-object');
+		formpanel=Ext.getCmp('modx-panel-resource');
         formpanel.autoLoad.params.object_id='neu';
 		formpanel.autoLoad.params['region']=null;
 		formpanel.doAutoLoad();		

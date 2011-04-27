@@ -9,7 +9,7 @@ Ext.onReady(function() {
 Xdbedit.page.Object = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        formpanel: 'xdbedit-panel-object'
+        formpanel: 'modx-panel-resource'
         ,buttons: [{
             text: _('save')
             ,id: 'xdbedit-btn-save'
@@ -22,7 +22,7 @@ Xdbedit.page.Object = function(config) {
             }]
         }]
 		,components: [{
-            xtype: 'xdbedit-panel-object'
+            xtype: 'modx-panel-resource'
             ,renderTo: 'xdbedit-panel-object-div'
             ,object_id: config.object_id
 			,configs: config.configs

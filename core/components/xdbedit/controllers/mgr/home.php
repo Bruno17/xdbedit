@@ -55,7 +55,7 @@ $plugin=$modx->getObject('modPlugin',array('name'=>$whichEditor));
             $tinyUrl=$xdbedit->config['jsUrl'].'tinymce/';
             require_once $xdbedit->config['modelPath'].'tinymce/tinymce.class.php';            
 			$tiny = new TinyMCE($modx,$tinyproperties,$tinyUrl);
-			if (isset($forfrontend) || $modx->isFrontend()) {
+			if (isset($forfrontend)) {
                 $def = $modx->getOption('cultureKey',null,$modx->getOption('manager_language',null,'en'));
                 $tiny->properties['language'] = $modx->getOption('fe_editor_lang',array(),$def);
                 $tiny->properties['frontend'] = true;

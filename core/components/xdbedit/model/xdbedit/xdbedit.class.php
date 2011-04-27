@@ -61,7 +61,7 @@ class Xdbedit {
             'controllersPath' => $corePath.'controllers/',
             'chunksPath' => $corePath.'elements/chunks/',
             'snippetsPath' => $corePath.'elements/snippets/',
-
+            'auto_create_tables' => true,
             'baseUrl' => $assetsUrl,
             'cssUrl' => $assetsUrl.'css/',
             'jsUrl' => $assetsUrl.'js/',
@@ -106,6 +106,8 @@ class Xdbedit {
                 }
                 $this->request = new xdbeditControllerRequest($this);
                 $output = $this->request->handleRequest();
+                $this->modx->setOption(xPDO::OPT_AUTO_CREATE_TABLES,$this->config['auto_create_tables']);
+                
                 break;
         }
         

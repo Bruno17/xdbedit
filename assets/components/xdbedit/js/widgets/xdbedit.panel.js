@@ -1,7 +1,7 @@
 Xdbedit.panel.Object = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        id: 'xdbedit-panel-object'
+        id: 'modx-panel-resource'
 		,title: _('template_variables')
         ,url: config.url
         ,baseParams: {configs: config.configs}		
@@ -63,7 +63,7 @@ Ext.extend(Xdbedit.panel.Object,MODx.FormPanel,{
 		
     
 });
-Ext.reg('xdbedit-panel-object',Xdbedit.panel.Object);
+Ext.reg('modx-panel-resource',Xdbedit.panel.Object);
 
 MODx.fireResourceFormChange = function(f,nv,ov) {
     //Ext.getCmp('modx-panel-resource').fireEvent('fieldChange');

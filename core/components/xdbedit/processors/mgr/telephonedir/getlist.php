@@ -10,6 +10,8 @@ $tablename = $config['tablename'];
 $packagepath = $modx->getOption('core_path') . 'components/'.$packageName.'/';
 $modelpath = $packagepath.'model/';
 
+
+
 $modx->addPackage($packageName,$modelpath,$prefix);
 $classname = $modx->xdbedit->getClassName($tablename);
 
@@ -57,6 +59,7 @@ if ($isCombo || $isLimit) {
 //$c->sortby($sort,$dir);
 //$c->prepare(); echo $c->toSql();
 $collection = $modx->getCollection($classname, $c);
+
 $rows=array();
 foreach ($collection as $row){
 	$rows[]=$row->toArray();

@@ -1,5 +1,6 @@
 <?php
-        
+
+        //$this->config['auto_create_tables']=false; //default is true
         /*
          * the packageName where you have your classes
          * this can be used in processors

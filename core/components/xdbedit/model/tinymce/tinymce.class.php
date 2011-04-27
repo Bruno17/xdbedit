@@ -105,8 +105,6 @@ class TinyMCE {
             'path_options' => $this->modx->getOption('tiny.path_options',$this->properties,''),
             'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
         ));
-       
-       $this->modx->log(modX::LOG_LEVEL_ERROR,print_r($this->properties['plugins'],1));   
 		
     }
 

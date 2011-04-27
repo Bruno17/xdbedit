@@ -110,39 +110,19 @@ $categories[$tabid] = $emptycat;
                 }
                 $tv->set('value',$v);
             }
-           
-			
-            if ($tv->type == 'richtext') {
-                if (is_array($replace_richtexteditor))
-                    $replace_richtexteditor = array_merge($replace_richtexteditor, array (
-                        'tv' . $tv->id
-                    ));
-                else
-                    $replace_richtexteditor = array (
-                        'tv' . $tv->id
-                    );
-            }
 				
 			//$inputForm = $tv->renderInput($resource->id);
 		
 		$modx->smarty->assign('tv',$tv);	
 			
-        $params= array ();
-        if ($paramstring= $tv->get('display_params')) {
-            $cp= explode("&", $paramstring);
-            foreach ($cp as $p => $v) {
-                $v= trim($v);
-                $ar= explode("=", $v);
-                if (is_array($ar) && count($ar) == 2) {
-                    $params[$ar[0]]= $tv->decodeParamValue($ar[1]);
-                }
-            }
-        }
+        $params = $tv->get('input_properties');
+        if (!isset($params['allowBlank'])) $params['allowBlank'] = 1;
         
 		$value= $tv->get('value');
         if ($value === null) {
             $value= $tv->get('default_text');
-        }		
+        }
+        $modx->smarty->assign('params',$params);        		
         /* find the correct renderer for the TV, if not one, render a textbox */
         $inputRenderPaths = $tv->getRenderDirectories('OnTVInputRenderList','input');
         $inputForm = $tv->getRender($params,$value,$inputRenderPaths,'input',$resourceId,$tv->get('type'));			
@@ -168,4 +148,4 @@ if (!empty($_REQUEST['showCheckbox'])) {
 }
 
 $modx->smarty->template_dir = $modx->xdbedit->config['corePath'].'templates/';
-return $modx->smarty->fetch('mgr/angebote/fields.tpl');
+return $modx->smarty->fetch('mgr/xdbedit/fields.tpl');
