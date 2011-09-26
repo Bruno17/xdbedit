@@ -40,6 +40,7 @@ if (! isset ($modx->smarty)){
 $modx->smarty->template_dir = $modx->getOption('manager_path').'templates/'.$modx->getOption('manager_theme', null, 'default').'/';
 
 $modx->smarty->assign('OnResourceTVFormPrerender',$onResourceTVFormPrerender);
+$modx->smarty->assign('_config', $modx->config);
 /*
 $delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
 if (file_exists($delegateView)) {
