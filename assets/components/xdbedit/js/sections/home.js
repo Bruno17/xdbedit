@@ -23,7 +23,6 @@ Xdbedit.page.Object = function(config) {
         }]
 		,components: [{
             xtype: 'modx-panel-resource'
-            ,renderTo: 'xdbedit-panel-object-div'
             ,object_id: config.object_id
 			,configs: config.configs
 	        ,url: Xdbedit.config.connector_url

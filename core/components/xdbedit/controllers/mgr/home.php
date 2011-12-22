@@ -98,9 +98,5 @@ Ext.onReady(function() {
 });
 </script>');
 */
-$output = '
-<div id="xdbedit-panel-object-div"></div>
-<div id="xdbedit-panel-objects-div"></div>
-';
 
-return $output;
+return '';
