@@ -45,7 +45,8 @@
                     ),
                     array(
                         'field'=>'jobtitle',
-                        'caption'=>'Job Title'
+                        'caption'=>'Job Title',
+                        'inputTV'=>'image'
                     ),
                     array(
                         'field'=>'region',
