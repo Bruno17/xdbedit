@@ -40,13 +40,13 @@
                     'caption'=>'Contact',
                     'fields'=>array(
                     array(
-                        'field'=>'name',
-                        'caption'=>'Name'
+                        'field'=>'pagetitle',
+                        'caption'=>'Pagetitle',
+                        'inputTV'=>'richtexttv'
                     ),
                     array(
                         'field'=>'jobtitle',
-                        'caption'=>'Job Title',
-                        'inputTV'=>'image'
+                        'caption'=>'Job Title'
                     ),
                     array(
                         'field'=>'region',
