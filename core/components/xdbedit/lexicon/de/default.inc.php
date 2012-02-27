@@ -48,3 +48,5 @@ $_lang['angebote.publish'] = 'Angebot ver&ouml;ffentlichen';
 $_lang['angebote.unpublish'] = 'Angebot zur&uuml;ckziehen';
 $_lang['month'] = 'Monat';
 $_lang['year'] = 'Jahr';
+$_lang['xdbedit.mark_fulfilled'] = 'Als eingelöst markieren';
+$_lang['xdbedit.sendmail'] = 'Kundenmail senden';

@@ -114,6 +114,12 @@ class Xdbedit {
 		
 		return $output;
     }
+    
+    function loadPackageManager(){
+        
+        include_once ($this->config['modelPath'].'xdbedit/xdbpackagemanager.class.php');
+        return new XdbPackageManager($this->modx);    
+    }
 
     function loadConfigs(){
         
@@ -134,6 +140,8 @@ class Xdbedit {
         $generator= $manager->getGenerator();
         return $generator->getClassName($tablename);
     }	
+
+
 
     /**
      * Gets a Chunk and caches it; also falls back to file-based templates
@@ -200,6 +208,7 @@ class Xdbedit {
 		
 		
     }
+
 
     /**
      * Builds simple pagination markup. Not yet used.
