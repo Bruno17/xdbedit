@@ -13,7 +13,7 @@
     {foreach from=$category->tvs item=tv name='tv'}
 
 {if $tv->type NEQ "hidden"}
-    <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv" id="tv{$tv->id}-tr">
+    <div class="x-form-item x-tab-item {cycle values=",alt"} modx-tv {if $smarty.foreach.tv.last}tv-last{/if}" id="tv{$tv->id}-tr">
         <label for="tv{$tv->id}" class="modx-tv-label">
 
             {if $showCheckbox}<input type="checkbox" name="tv{$tv->id}-checkbox" class="modx-tv-checkbox" value="1" />{/if}
@@ -78,13 +78,12 @@ Ext.onReady(function() {
         ,applyTo: 'modx-tv-tabs'
         ,activeTab: 0
         ,autoTabs: true
-        ,border: false
+        ,border: true
         ,plain: true
-        //,width: Ext.getCmp('modx-panel-resource').getWidth() - 30
         ,hideMode: 'offsets'
         ,autoScroll: true
         ,defaults: {
-            bodyStyle: 'padding: 5px;'
+            bodyCssClass: 'main-wrapper'
             ,autoScroll: true
             ,autoHeight: true
         }
