@@ -52,7 +52,10 @@ Ext.extend(Xdbedit.panel.Object,MODx.FormPanel,{
         }     
     }
     ,success: function(o) {
-		this.doAutoLoad();
+        if (o.result.message != ''){
+            Ext.Msg.alert(_('warning'), o.result.message);
+        }
+        this.doAutoLoad();
 		var gf = Ext.getCmp('xdbedit-grid-objects');
 		gf.isModified = true;
 		gf.refresh();

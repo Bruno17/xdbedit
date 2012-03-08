@@ -49,6 +49,7 @@ if (file_exists(MODX_CORE_PATH . 'model/modx/modmanagercontroller.class.php')) {
 }
 
 
+
 /*
 $delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
 if (file_exists($delegateView)) {
@@ -79,6 +80,8 @@ if (empty($object)) return $modx->error->failure($modx->lexicon('quip.thread_err
 
 //echo '<pre>'.print_r($angebot->toArray(),1).'</pre>';
 
+$objectArray = isset($objectArray) ? $objectArray : $object->toArray();
+
 $modx->xdbedit->loadConfigs();
 $tabs = $modx->xdbedit->getTabs();
 $fieldid = 0;
@@ -101,7 +104,7 @@ foreach ($tabs as $tabid => $tab) {
             $tv = $modx->newObject('modTemplateVar');
         }
         //echo '<pre>'.print_r($tv->toArray(),1).'</pre>';
-        $fieldvalue = $object->get($field['field']);
+        $fieldvalue = $objectArray[$field['field']];
         //if (!empty($fieldvalue)){}
         $tv->set('value', $fieldvalue);
         $tv->set('caption', $field['caption']);

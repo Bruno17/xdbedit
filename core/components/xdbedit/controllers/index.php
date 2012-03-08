@@ -1,14 +1,14 @@
 <?php
 /**
- * stellenboerse
+ * xdbedit
  *
  * @author Bruno Perner
  *
  *
- * @package stellenboerse
+ * @package xdbedit
  */
 /**
- * @package stellenboerse
+ * @package xdbedit
  * @subpackage controllers
  */
 require_once dirname(dirname(__FILE__)).'/model/xdbedit/xdbedit.class.php';
