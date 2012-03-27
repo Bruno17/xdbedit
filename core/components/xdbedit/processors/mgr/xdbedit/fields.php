@@ -49,7 +49,6 @@ if (file_exists(MODX_CORE_PATH . 'model/modx/modmanagercontroller.class.php')) {
 }
 
 
-
 /*
 $delegateView= dirname(__FILE__) . '/' . $resourceDir . '/' . basename(__FILE__);
 if (file_exists($delegateView)) {

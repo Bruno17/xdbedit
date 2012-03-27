@@ -42,6 +42,7 @@ $_lang['xdbedit.show_trash'] = 'Trash View';
 $_lang['xdbedit.show_normal'] = 'Normal View';
 $_lang['xdbedit.recall'] = 'Recall';
 $_lang['xdbedit.remove'] = 'Remove';
+$_lang['xdbedit.new'] = 'nouveau';
 $_lang['angebote.edit'] = 'Modifier l\'offre';
 $_lang['angebote.create'] = 'Créer l\'offre';
 $_lang['angebote.publish'] = 'Publier l\'offre';

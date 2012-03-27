@@ -2,12 +2,13 @@ Xdbedit.panel.Object = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         id: 'modx-panel-resource'
-		,title: _('template_variables')
+	,cls: 'container'
         ,url: config.url
+        ,defaults: {
+        	   collapsible: false 
+                   ,autoHeight: true
+        }
         ,baseParams: {configs: config.configs}		
-        ,class_key: ''
-        ,bodyStyle: 'padding: 15px;'
-        ,autoHeight: true
         ,autoLoad: this.autoload(config)
         ,width: '97%'
         ,listeners: {

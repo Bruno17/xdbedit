@@ -42,6 +42,7 @@ $_lang['xdbedit.show_trash'] = 'Papierkorbansicht';
 $_lang['xdbedit.show_normal'] = 'Normalansicht';
 $_lang['xdbedit.recall'] = 'Wiederherstellen';
 $_lang['xdbedit.remove'] = 'Entfernen';
+$_lang['xdbedit.new'] = 'neu';
 $_lang['angebote.edit'] = 'Angebot bearbeiten';
 $_lang['angebote.create'] = 'Angebote erstellen';
 $_lang['angebote.publish'] = 'Angebot ver&ouml;ffentlichen';
