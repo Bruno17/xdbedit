@@ -33,6 +33,7 @@ $_lang['xdbedit.create'] = 'Erstellen';
 $_lang['xdbedit.publish'] = 'Ver&ouml;ffentlichen';
 $_lang['xdbedit.unpublish'] = 'Zur&uuml;ckziehen';
 $_lang['xdbedit.delete'] = 'L&ouml;schen';
+$_lang['xdbedit.new'] = 'neu';
 $_lang['xdbedit.bulk_actions'] = 'Stapelverarbeitung';
 $_lang['xdbedit.publish_selected'] = 'Publish Selected';
 $_lang['xdbedit.unpublish_selected'] = 'Unpublish Selected';
